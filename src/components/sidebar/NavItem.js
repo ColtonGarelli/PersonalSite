@@ -1,10 +1,10 @@
 import PropTypes from "prop-types";
-import { forwardRef, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import {forwardRef, useEffect} from "react";
+import {Link} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
 import chroma from "chroma-js";
 // material-ui
-import { useTheme } from "@mui/material/styles";
+import {useTheme} from "@mui/material/styles";
 import {
   Avatar,
   Chip,
@@ -17,7 +17,7 @@ import {
 } from "@mui/material";
 
 // project imports
-import { MENU_OPEN, SET_MENU } from "../../store/actions";
+import {MENU_OPEN, SET_MENU} from "../../store/actions";
 import config from "../../config";
 
 // assets
@@ -27,10 +27,10 @@ import ExpandLess from "@mui/icons-material/ExpandLess";
 
 // ==============================|| SIDEBAR MENU LIST ITEMS ||============================== //
 
-const NavItem = ({ item, level }) => {
+const NavItem = ({item, level}) => {
   const theme = useTheme();
   const dispatch = useDispatch();
-  const customization = useSelector((state) => state.customization);
+  const customization = useSelector(state => state.customization);
   const matchesSM = useMediaQuery(theme.breakpoints.down("lg"));
 
   let itemTarget = "_self";
@@ -49,12 +49,12 @@ const NavItem = ({ item, level }) => {
     ))
   };
   if (item?.external) {
-    listItemProps = { component: "a", href: item.url, target: itemTarget };
+    listItemProps = {component: "a", href: item.url, target: itemTarget};
   }
 
-  const itemHandler = (id) => {
-    dispatch({ type: MENU_OPEN, id });
-    if (matchesSM) dispatch({ type: SET_MENU, opened: false });
+  const itemHandler = id => {
+    dispatch({type: MENU_OPEN, id});
+    if (matchesSM) dispatch({type: SET_MENU, opened: false});
   };
 
   // active menu item on page load
@@ -62,9 +62,9 @@ const NavItem = ({ item, level }) => {
     const currentIndex = document.location.pathname
       .toString()
       .split("/")
-      .findIndex((id) => id === item.id);
+      .findIndex(id => id === item.id);
     if (currentIndex > -1) {
-      dispatch({ type: MENU_OPEN, id: item.id });
+      dispatch({type: MENU_OPEN, id: item.id});
     }
     // eslint-disable-next-line
   }, []);
@@ -82,8 +82,6 @@ const NavItem = ({ item, level }) => {
         justifyContent: "center", // "rgb(121, 134, 203, 0.3)",
         // (${theme.palette.default?.primary})
 
-        border: "3px solid rgb(121, 134, 203, 0.5)",
-
         py: level > 1 ? 1 : 3,
         pl: `${level * 25}px`,
         "& .MuiListItemButton": {
@@ -91,37 +89,38 @@ const NavItem = ({ item, level }) => {
           width: "100%",
           position: "absolute",
           backgroundSize: "cover",
-          backgroundPosition: "center center",
+          backgroundPosition: "center center"
         }
       }}
-      selected={customization.isOpen.findIndex((id) => id === item.id) > -1}
+      selected={customization.isOpen.findIndex(id => id === item.id) > -1}
       onClick={() => {
         itemHandler(item.id);
       }}
     >
       <ListItemText
-        primary={(
+        sx={{alignItems: "center"}}
+        primary={
           <Typography
             variant={
-              customization.isOpen.findIndex((id) => id === item.id) > -1
-                ? "h2"
-                : "h2"
+              customization.isOpen.findIndex(id => id === item.id) > -1
+                ? "h4"
+                : "h4"
             }
-            color="rgb(250, 250, 250, 0.5)"
+            color="rgb(50, 250, 0, 0.9) !important"
             sx={{
               "&:hover": {
-                color: "rgb(250, 250, 250, 0.9) !important"
+                color: "rgb(250, 250, 0, 0.9) !important"
               }
             }}
           >
             {item.title}
           </Typography>
-        )}
+        }
         secondary={
           item.caption && (
             <Typography
               variant="caption"
-              sx={{ ...theme.typography.subMenuCaption }}
+              sx={{...theme.typography.subMenuCaption}}
               display="block"
               gutterBottom
             >

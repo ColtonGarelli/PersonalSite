@@ -1,9 +1,10 @@
-import home from "./home"
+import home from "./home";
+import pubs from "./pubs";
 
 // ==============================|| MENU ITEMS ||============================== //
 
 const menuItems = {
-  items: [home]
+  items: [home, pubs]
 };
 
 export default menuItems;

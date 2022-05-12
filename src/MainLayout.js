@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Outlet } from "react-router-dom";
+import {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {Outlet} from "react-router-dom";
 
 // material-ui
-import { styled, useTheme , createTheme} from "@mui/material/styles";
+import {styled, useTheme, createTheme} from "@mui/material/styles";
 import {
   AppBar,
   Box,
@@ -11,20 +11,21 @@ import {
   CssBaseline,
   Toolbar,
   Breadcrumbs,
+  Typography,
   useMediaQuery
 } from "@mui/material";
 
 // project imports
 import Header from "./components/Header";
 import Sidebar from "./components/sidebar/Sidebar";
-import { drawerWidth } from "./store/constant";
+import {drawerWidth} from "./store/constant";
 // import { SET_MENU } from "store/actions";
 
 const SET_MENU = "@customization/SET_MENU";
 
 // styles
-const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
-  ({ theme, open }) => ({
+const Main = styled("main", {shouldForwardProp: prop => prop !== "open"})(
+  ({theme, open}) => ({
     ...theme.typography.mainContent,
     ...(!open && {
       borderBottomLeftRadius: 0,
@@ -56,6 +57,7 @@ const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
         easing: theme.transitions.easing.easeOut,
         duration: theme.transitions.duration.enteringScreen
       }),
+      // this is styling for the main content card in middle of the page
       background: "rgb(0,0,0, 0.1)",
       border: "1px",
       borderColor: "#fff",
@@ -77,30 +79,27 @@ const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
 // ==============================|| MAIN LAYOUT ||============================== //
 
 const MainLayout = () => {
-  const theme = createTheme()
+  const theme = createTheme();
   // const theme = useTheme(theme);
   // const [pageTheme, setPageTheme] = useState("");
   const matchDownMd = useMediaQuery(theme.breakpoints.down("md"));
   // Handle left drawer
-  const leftDrawerOpened = useSelector((state) => state.customization.opened);
-  const iso = useSelector((state) => state.customization.isOpen);
+  const leftDrawerOpened = useSelector(state => state.customization.opened);
+  const iso = useSelector(state => state.customization.isOpen);
   const dispatch = useDispatch();
   console.log(leftDrawerOpened);
   const handleLeftDrawerToggle = () => {
-    dispatch({ type: SET_MENU, opened: !leftDrawerOpened });
+    dispatch({type: SET_MENU, opened: !leftDrawerOpened});
   };
 
-  // useEffect(() => {
-  //   dispatch({ type: SET_MENU, opened: !matchDownMd });
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [matchDownMd]);
+  //         background: "linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%)"
 
-  // .scale(["hsl(246, 71%, 24%)", "#340a6a", "#440068", "#a90000"])
   return (
     <Box
-      sx={{height: '100vh',
-        display: "flex"}}
-
+      sx={{
+        height: "100vh",
+        display: "flex"
+      }}
     >
       <CssBaseline />
       {/* header */}
@@ -109,6 +108,7 @@ const MainLayout = () => {
         position="fixed"
         elevation={0}
         sx={{
+          background: "transparent",
           backdropFilter: "blur(5px)",
           height: "150px",
           transition: leftDrawerOpened
@@ -118,6 +118,14 @@ const MainLayout = () => {
       >
         <Toolbar>
           <Header handleLeftDrawerToggle={handleLeftDrawerToggle} />
+          <Typography
+            align="center"
+            variant="h1"
+            color="black"
+            sx={{width: "100%", alignItems: "center"}}
+          >
+            Colton Garelli
+          </Typography>
         </Toolbar>
       </AppBar>
 
@@ -130,11 +138,7 @@ const MainLayout = () => {
       {/* main content */}
       <Main theme={theme} open={leftDrawerOpened}>
         {/* breadcrumb */}
-        <Breadcrumbs
-          icon
-          title
-          rightAlign
-        />
+        <Breadcrumbs />
         <Outlet />
       </Main>
     </Box>
