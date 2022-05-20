@@ -1,0 +1,232 @@
+# %% codecell
+%load_ext rpy2.ipython
+# %% codecell
+%%R
+early <- read.csv('/Users/coltongarelli/Desktop/GSE113113_stage1_DE.csv')
+filt <- c(
+    'gene', 'logFC', 'adj.P.Val')
+late <- read.csv('/Users/coltongarelli/Desktop/GSE113113_stage2_DE.csv')
+early <- early[ ,filt]
+late <- late[ ,filt]
+# %% codecell
+%%R
+e_genes <- mygene::queryMany(early$X, returnall=TRUE, scopes='symbol', fields='entrezgene', species='human',
+                         verbose=TRUE)
+l_genes <- mygene::queryMany(late$X, returnall=TRUE, scopes='symbol', fields='entrezgene', species='human',
+                         verbose=TRUE)
+
+# %% codecell
+%%R
+e_g <- e_genes$response[c('query', 'entrezgene')]
+l_g <- l_genes$response[c('query', 'entrezgene')]
+# %% codecell
+%%R
+e_g$X <- e_g$query
+l_g$X <- l_g$query
+early_entrez <- merge(early, e_g, by='X')
+late_entrez <- merge(late, l_g, by='X')
+# %% codecell
+%%R
+early_entrez <- early_entrez[!is.na(early_entrez$entrezgene),]
+late_entrez <- late_entrez[!is.na(late_entrez$entrezgene),]
+
+# %% codecell
+%%R
+# omit NAs
+early_de <- early_entrez[abs(early_entrez$logFC) > 1.0,]
+early_de <- early_de[early_de$adj.P.Val < 0.05,]
+late_de <- late_entrez[abs(late_entrez$logFC) > 1.5,]
+late_de <- late_de[late_de$adj.P.Val < 0.05,]
+# %% codecell
+%%R
+early_de <- early_de[sort(early_de$logFC, decreasing=TRUE),]
+late_de <- late_de[sort(late_de$logFC, decreasing=TRUE),]
+# %% codecell
+%%R
+early_en <- DOSE::enrichDGN(early_de$entrezgene)
+late_en <- DOSE::enrichDGN(late_de$entrezgene)
+# %% codecell
+%%R
+readable_edo <- DOSE::setReadable(early_en,'org.Hs.eg.db', 'ENTREZID')
+readable_edo
+# %% codecell
+%%R
+# pdf(file='/Users/coltongarelli/Desktop/early_ctcl_cnet.pdf', height=15, width=15)
+# f <-clusterProfiler::cnetplot(readable_edo, node_label='all')
+# print(f)
+# dev.off()
+
+# %% codecell
+%%R
+# readable_edo <- DOSE::setReadable(late_en,'org.Hs.eg.db', 'ENTREZID')
+# pdf(file='/Users/coltongarelli/Desktop/late_ctcl_emap.pdf', height=15, width=15)
+# f <-clusterProfiler::emapplot(readable_edo, node_label='all')
+# print(f)
+# dev.off()
+# %% codecell
+%%R
+early_kegg <- clusterProfiler::compareCluster(early_de, fun="enrichKEGG", organism='hsa', pvalueCutoff=0.05)
+
+# %% codecell
+%%R
+clusterProfiler::emapplot(early_kegg)
+# %% codecell
+%%R
+simplified <- early_de$logFC
+names(simplified) <- early_de$entrezgene
+simplified
+
+# %% codecell
+%%R
+ego3 <- clusterProfiler::gseGO(geneList= simplified,
+              OrgDb        = 'org.Hs.eg.db',
+              ont          = "BP",
+              nPerm        = 1000,
+              minGSSize    = 100,
+              maxGSSize    = 500,
+              pvalueCutoff = 0.05,
+              verbose      = FALSE)
+# %% codecell
+%%R
+pdf(file='/Users/coltongarelli/Desktop/early_ctcl_go_fc_emap.pdf', height=15, width=15)
+ff<-clusterProfiler::emapplot(ego3, layout='kk')
+print(ff)
+dev.off()
+
+# %% codecell
+%%R
+ego3_read <- DOSE::setReadable(ego3,'org.Hs.eg.db', 'ENTREZID')
+pdf(file='/Users/coltongarelli/Desktop/early_ctcl_go_fc_cnet.pdf', height=15, width=15)
+
+ff<-clusterProfiler::cnetplot(ego3_read, layout='kk')
+print(ff)
+dev.off()
+
+# %% codecell
+%%R
+simplified <- late_de$logFC
+names(simplified) <- late_de$entrezgene
+simplified
+ego_late <- clusterProfiler::gseGO(geneList= simplified,
+              OrgDb        = 'org.Hs.eg.db',
+              ont          = "BP",
+              nPerm        = 1000,
+              minGSSize    = 100,
+              maxGSSize    = 500,
+              pvalueCutoff = 0.05,
+              verbose      = FALSE)
+# %% codecell
+%%R
+ego_late_read <- DOSE::setReadable(ego3,'org.Hs.eg.db', 'ENTREZID')
+pdf(file='/Users/coltongarelli/Desktop/early_ctcl_go_fc_upsetplot.pdf', height=15, width=15)
+
+ff<-enrichplot::upsetplot(ego3, n=10)
+print(ff)
+dev.off()
+# %% codecell
+%%R
+pdf(file='/Users/coltongarelli/Desktop/late_ctcl_go_fc_cnet.pdf', height=15, width=15)
+
+ff<-clusterProfiler::cnetplot(ego_late_read, layout='kk')
+print(ff)
+dev.off()
+# %% codecell
+%%R
+# names(simplified) = as.character($entrez)
+dx <- DOSE::gseNCG(simplified) #, OrgDb='org.Hs.eg.db', ont='ALL', pvalueCutoff=0.5)
+# %% codecell
+%%R
+early_kegg <- clusterProfiler::gseMKEGG(geneList=simplified, organism='hsa', keyType='ncbi-geneid')
+# %% codecell
+%%R
+early_entrez$query['CXCL9']
+
+# %% codecell
+early_de
+# %% codecell
+
+# %% codecell
+%%R
+simplified <- late_de$logFC
+names(simplified) <- late_de$entrezgene
+simplified
+ego_late <- clusterProfiler::gseGO(geneList= simplified,
+              OrgDb        = 'org.Hs.eg.db',
+              ont          = "BP",
+              nPerm        = 1000,
+              minGSSize    = 100,
+              maxGSSize    = 500,
+              pvalueCutoff = 0.05,
+              verbose      = FALSE)
+# %% codecell
+%%R
+ego_late_read <- DOSE::setReadable(ego3,'org.Hs.eg.db', 'ENTREZID')
+pdf(file='/Users/coltongarelli/Desktop/early_ctcl_go_fc_upsetplot.pdf', height=15, width=15)
+
+ff<-enrichplot::upsetplot(ego3, n=10)
+print(ff)
+dev.off()
+# %% codecell
+%%R
+pdf(file='/Users/coltongarelli/Desktop/late_ctcl_go_fc_cnet.pdf', height=15, width=15)
+
+ff<-clusterProfiler::cnetplot(ego_late_read, layout='kk')
+print(ff)
+dev.off()
+# %% codecell
+%%R
+# names(simplified) = as.character($entrez)
+dx <- DOSE::gseNCG(simplified) #, OrgDb='org.Hs.eg.db', ont='ALL', pvalueCutoff=0.5)
+# %% codecell
+%%R
+early_kegg <- clusterProfiler::gseMKEGG(geneList=simplified, organism='hsa', keyType='ncbi-geneid')
+# %% codecell
+%%R
+early_entrez$query['CXCL9']
+
+# %% codecell
+early_de
+# %% codecell
+
+# %% codecell
+%%R
+simplified <- late_de$logFC
+names(simplified) <- late_de$entrezgene
+simplified
+ego_late <- clusterProfiler::gseGO(geneList= simplified,
+              OrgDb        = 'org.Hs.eg.db',
+              ont          = "BP",
+              nPerm        = 1000,
+              minGSSize    = 100,
+              maxGSSize    = 500,
+              pvalueCutoff = 0.05,
+              verbose      = FALSE)
+# %% codecell
+%%R
+ego_late_read <- DOSE::setReadable(ego3,'org.Hs.eg.db', 'ENTREZID')
+pdf(file='/Users/coltongarelli/Desktop/early_ctcl_go_fc_upsetplot.pdf', height=15, width=15)
+
+ff<-enrichplot::upsetplot(ego3, n=10)
+print(ff)
+dev.off()
+# %% codecell
+%%R
+pdf(file='/Users/coltongarelli/Desktop/late_ctcl_go_fc_cnet.pdf', height=15, width=15)
+
+ff<-clusterProfiler::cnetplot(ego_late_read, layout='kk')
+print(ff)
+dev.off()
+# %% codecell
+%%R
+# names(simplified) = as.character($entrez)
+dx <- DOSE::gseNCG(simplified) #, OrgDb='org.Hs.eg.db', ont='ALL', pvalueCutoff=0.5)
+# %% codecell
+%%R
+early_kegg <- clusterProfiler::gseMKEGG(geneList=simplified, organism='hsa', keyType='ncbi-geneid')
+# %% codecell
+%%R
+early_entrez$query['CXCL9']
+
+# %% codecell
+early_de
+# %% codecell

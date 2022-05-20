@@ -63,6 +63,7 @@ const Main = styled("main", {shouldForwardProp: prop => prop !== "open"})(
       borderColor: "#fff",
       marginLeft: 0,
       marginTop: "20vh",
+      height: "120%",
       borderBottomLeftRadius: 0,
       borderBottomRightRadius: 0,
       width: `calc(100% - ${drawerWidth}px)`,
@@ -136,7 +137,7 @@ const MainLayout = () => {
       />
 
       {/* main content */}
-      <Main theme={theme} open={leftDrawerOpened}>
+      <Main theme={theme} open={leftDrawerOpened} sx={{p: 2}}>
         {/* breadcrumb */}
         <Breadcrumbs />
         <Outlet />
