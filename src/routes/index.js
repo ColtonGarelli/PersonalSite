@@ -11,9 +11,7 @@ import config from "../config";
 // dashboard routing
 const Home = Loadable(lazy(() => import("../pages/Home")));
 const Pubs = Loadable(lazy(() => import("../pages/Pubs")));
-const JupyterNotebooks = Loadable(
-  lazy(() => import("../pages/JupyterNotebooks"))
-);
+const Notebooks = Loadable(lazy(() => import("../pages/Notebooks")));
 
 // ==============================|| ROUTING RENDER ||============================== //
 const MainRoutes = {
@@ -23,7 +21,7 @@ const MainRoutes = {
     {path: "/", element: <Home />},
     {path: "/home", element: <Home />},
     {path: "/pubs", element: <Pubs />},
-    {path: "/notebooks", element: <JupyterNotebooks />}
+    {path: "/notebooks", element: <Notebooks />}
   ]
 };
 

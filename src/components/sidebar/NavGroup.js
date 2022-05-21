@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
 
 // material-ui
-import { useTheme } from "@mui/material/styles";
-import { Divider, List, Typography } from "@mui/material";
+import {useTheme} from "@mui/material/styles";
+import {Divider, List, Typography} from "@mui/material";
 
 // project imports
 import NavItem from "./NavItem";
@@ -10,10 +10,11 @@ import NavCollapse from "./NavCollapse";
 
 // ==============================|| SIDEBAR MENU LIST GROUP ||============================== //
 
-const NavGroup = ({ item }) => {
+const NavGroup = ({item}) => {
   const theme = useTheme();
   // menu list collapse & items
-  const items = item.children?.map((menu) => {
+  console.log(item);
+  const items = item.children?.map(menu => {
     switch (menu.type) {
       case "collapse":
         return <NavCollapse key={menu.id} menu={menu} level={1} />;
@@ -30,7 +31,7 @@ const NavGroup = ({ item }) => {
 
   return (
     <>
-      <List sx={{ pt: 4, pb: 3, background: "transparent" }}>{items}</List>
+      <List sx={{pt: 4, pb: 3, background: "transparent"}}>{items}</List>
     </>
   );
 };
