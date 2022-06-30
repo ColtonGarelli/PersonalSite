@@ -1,7 +1,7 @@
 import * as ReactDOM from "react-dom/client";
 
 // third party
-import {BrowserRouter} from "react-router-dom";
+import {HashRouter} from "react-router-dom";
 import {Provider} from "react-redux";
 
 // project imports
@@ -16,9 +16,9 @@ import "./assets/scss/style.scss";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
-    <BrowserRouter>
+    <HashRouter>
       <App />
-    </BrowserRouter>
+    </HashRouter>
   </Provider>
 );
 
