@@ -10,6 +10,8 @@ import config from "../config";
 
 // dashboard routing
 const Home = Loadable(lazy(() => import("../pages/Home")));
+const Resume = Loadable(lazy(() => import("../pages/Resume")));
+
 const Pubs = Loadable(lazy(() => import("../pages/Pubs")));
 const Notebooks = Loadable(lazy(() => import("../pages/Notebooks")));
 
@@ -20,6 +22,7 @@ const MainRoutes = {
   children: [
     {path: "/", element: <Home />},
     {path: "/home", element: <Home />},
+    {path: "/resume", element: <Resume />},
     {path: "/pubs", element: <Pubs />},
     {path: "/notebooks", element: <Notebooks />}
   ]

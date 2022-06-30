@@ -1,9 +1,10 @@
-import { useSelector } from "react-redux";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { CssBaseline, StyledEngineProvider } from "@mui/material";
-import { useMemo, createContext, useState } from "react";
+import {useSelector} from "react-redux";
+import {ThemeProvider, createTheme} from "@mui/material/styles";
+import {CssBaseline, StyledEngineProvider} from "@mui/material";
+import {useMemo, createContext, useState} from "react";
 // routing
 import Routes from "./routes";
+import themes from "./themes";
 
 // defaultTheme
 // import themes from "./themes";
@@ -19,18 +20,14 @@ import NavigationScroll from "./components/NavigationScroll";
 // dispatch can be used to dispatch actions
 // reducers take state and action to make a change
 // this.props.location.pathname?
-
+const customization = "";
 const App = () => {
-const theme = createTheme();
-console.log(theme)
   return (
     <StyledEngineProvider injectFirst>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={themes(customization)}>
         <CssBaseline />
 
-        <NavigationScroll>
-          <Routes />
-        </NavigationScroll>
+        <Routes />
       </ThemeProvider>
     </StyledEngineProvider>
   );

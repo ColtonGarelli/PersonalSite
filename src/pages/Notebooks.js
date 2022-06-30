@@ -5,7 +5,7 @@ import nb_test from "../samplejupyter.json"; // You need to read the .ipynb file
 import samplePDF from "../assets/pdfs/sample.pdf";
 // const notebook = () => <JupyterViewer rawIpynb={nb_test} />;
 import {Viewer, Worker} from "@react-pdf-viewer/core";
-
+import PdfSelector from "../components/PdfSelector";
 import {useEffect, useState} from "react";
 // import { gridSpacing } from "store/constant";
 
@@ -49,6 +49,18 @@ class ErrorBoundary extends React.Component {
 
 const Notebooks = () => {
   const gridSpacing = 5;
+  const [currentPDF, setCurrentPDF] = useState(samplePDF);
+
+  const handleChange = event => {
+    console.log(event.target.value);
+
+    setCurrentPDF(event.target.value);
+  };
+  const pdfs = [
+    {file: samplePDF, title: "Sample"},
+    {file: samplePDF, title: "Sample1"},
+    {file: samplePDF, title: "Sample2"}
+  ];
   return (
     <>
       <Box
@@ -64,15 +76,19 @@ const Notebooks = () => {
             <Box>
               <Typography variant="h2" gutterBottom>
                 <Box overflowY="hidden" sx={{height: "60vh"}}>
+                  <PdfSelector
+                    props={{
+                      currentPDF,
+                      handleChange,
+                      pdfs
+                    }}
+                  />
                   <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.13.216/build/pdf.worker.min.js">
                     <Viewer fileUrl={samplePDF}></Viewer>
                   </Worker>
                 </Box>
               </Typography>
             </Box>
-          </Grid>
-          <Grid item xs={6} md={4}>
-            <Citations />
           </Grid>
         </Grid>
       </Box>

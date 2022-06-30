@@ -2,6 +2,7 @@
   "name": "PersonalSite",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://coltongarelli.github.io",
   "dependencies": {
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
@@ -33,11 +34,14 @@
     "tabler": "^1.0.0-alpha.8",
     "typescript": "^4.6.3",
     "typescript-eslint": "^0.0.1-alpha.0",
+    "util": "^0.12.4",
     "web-vitals": "^2.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -58,5 +62,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^4.0.0"
   }
 }

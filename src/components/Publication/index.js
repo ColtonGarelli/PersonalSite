@@ -15,12 +15,6 @@ import {
   ThumbnailIcon
 } from "@react-pdf-viewer/default-layout";
 import {pageNavigationPlugin} from "@react-pdf-viewer/page-navigation";
-import {
-  DownArrowIcon,
-  NextIcon,
-  PreviousIcon,
-  UpArrowIcon
-} from "@react-pdf-viewer/page-navigation";
 
 import {
   Box,
@@ -34,27 +28,21 @@ import samplePDF from "../../assets/pdfs/sample.pdf";
 import sharedSigs from "../../assets/pdfs/shared_inflammatory_sigs.pdf";
 import cutaneousLupusRev from "../../assets/pdfs/Current Insights in Cutaneous Lupus Erythematosus Immunopathogenesis.pdf";
 import {toolbarPlugin} from "@react-pdf-viewer/toolbar";
-import {RenderGoToPageProps} from "@react-pdf-viewer/page-navigation";
+import PdfNav from "../PdfNav";
 import PdfSelector from "../PdfSelector";
 pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 const Publication = props => {
   const path = sharedSigs;
-  const pageNavigationPluginInstance = pageNavigationPlugin();
-  const {
-    GoToFirstPage,
-    GoToLastPage,
-    GoToNextPage,
-    GoToPreviousPage
-  } = pageNavigationPluginInstance;
+
   const toolbarPluginInstance = toolbarPlugin((props: ToolbarPluginProps));
 
-  const [paper, setPaper] = useState(sharedSigs);
+  const [currentPDF, setCurrentPDF] = useState(sharedSigs);
 
   const handleChange = event => {
     console.log(event.target.value);
 
-    setPaper(event.target.value);
+    setCurrentPDF(event.target.value);
   };
   const pdfs = [
     {
@@ -74,50 +62,14 @@ const Publication = props => {
     <>
       <PdfSelector
         props={{
-          paper,
+          currentPDF,
           handleChange,
           pdfs
         }}
       />
       <Box overflowY="hidden" sx={{height: "60vh"}}>
-        <div
-          style={{
-            alignItems: "center",
-            backgroundColor: "#eeeeee",
-            borderBottom: "1px solid rgba(0, 0, 0, 0.1)",
-            display: "flex",
-            justifyContent: "center",
-            padding: "4px"
-          }}
-        >
-          <div style={{padding: "0 2px"}}>
-            <GoToFirstPage>
-              {(props: RenderGoToPageProps) => (
-                <button
-                  style={{
-                    backgroundColor: "#357edd",
-                    border: "none",
-                    borderRadius: "4px",
-                    color: "#ffffff",
-                    cursor: "pointer",
-                    padding: "8px"
-                  }}
-                  onClick={props.onClick}
-                >
-                  First page
-                </button>
-              )}
-            </GoToFirstPage>
-          </div>
-        </div>
-
         <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.13.216/build/pdf.worker.min.js">
-          <Viewer
-            fileUrl={paper}
-            plugins={[toolbarPluginInstance, pageNavigationPluginInstance]}
-          >
-            <DownArrowIcon />
-          </Viewer>
+          <PdfNav props={{currentPDF}} />
         </Worker>
       </Box>
     </>

@@ -14,9 +14,11 @@ import {
   Box,
   Menu,
   MenuItem,
+  IconButton,
   Typography,
   useMediaQuery
 } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
 
 import {gridSpacing} from "../store/constant";
 
@@ -26,6 +28,8 @@ import MoreHorizOutlinedIcon from "@mui/icons-material/MoreHorizOutlined";
 
 import Citation from "./Citation";
 import PerfectScrollbar from "react-perfect-scrollbar";
+import "react-perfect-scrollbar/dist/css/styles.css";
+import chroma from "chroma-js";
 // ==============================|| DASHBOARD DEFAULT - POPULAR CARD ||============================== //
 import NavigationScroll from "./NavigationScroll";
 
@@ -43,76 +47,86 @@ const Citations = ({isLoading, data}) => {
     // AnchorElement
     setAnchorEl(null);
   };
+  // <MoreHorizOutlinedIcon
+  //   fontSize="large"
+  //   sx={{
+  //     alignItems: "right",
+  //     // this component is the three dots dropdown
+  //     color: theme.palette.secondary.main,
+  //     cursor: "pointer"
+  //   }}
+  //   aria-controls="menu-popular-card"
+  //   aria-haspopup="true"
+  //   onClick={handleClick}
+  // />
+  console.log(
+    chroma(theme.palette.primary.main)
+      .alpha(0.5)
+      .rgba()
+  );
   return (
     <>
-      <NavigationScroll>
-        <Box width="400px" sx={{p: 3, background: theme.palette.primary.main}}>
-          <Typography variant="h4">Publications</Typography>
-          <MoreHorizOutlinedIcon
-            fontSize="large"
-            sx={{
-              alignItems: "right",
-              // this component is the three dots dropdown
-              color: theme.palette.secondary.main,
-              cursor: "pointer"
-            }}
-            aria-controls="menu-popular-card"
-            aria-haspopup="true"
-            onClick={handleClick}
-          />
-          {/* "<!-- menu selector options -->" */}
-          <Menu
-            id="menu-popular-card"
-            anchorEl={anchorEl}
-            keepMounted
-            open={Boolean(anchorEl)}
-            onClose={handleClose}
-            variant="selectedMenu"
-            anchorOrigin={{
-              vertical: "bottom",
-              horizontal: "right"
-            }}
-            transformOrigin={{
-              vertical: "top",
-              horizontal: "right"
-            }}
-          >
-            <MenuItem onClick={handleClose}> Daily</MenuItem>
-            <MenuItem onClick={handleClose}> Monthly</MenuItem>
-            <MenuItem onClick={handleClose}> Yearly </MenuItem>
-          </Menu>
-          <Box
-            sx={{
-              overflow: "hidden",
-              height: 500
-              // position: "relative",
-              // overflowY: "scroll"
-            }}
-          >
-            <CardContent>
-              <Grid container spacing={gridSpacing}>
-                <Grid item xs={12}>
-                  <Grid
-                    container
-                    alignContent="flex-end"
-                    justifyContent="space-between"
-                  >
-                    <Grid item></Grid>
-                  </Grid>
-                  <Citation />
-                  <Divider sx={{my: 1.5}} />
-                </Grid>
-              </Grid>
-            </CardContent>
-            <CardActions sx={{p: 1.25, pt: 0, justifyContent: "center"}}>
-              <Button size="small" disableElevation>
-                Link
-                <ChevronRightOutlinedIcon />
-              </Button>
-            </CardActions>
+      {" "}
+      <Box
+        width="400px"
+        height="70vh"
+        sx={{
+          overflowY: "scroll",
+          background: chroma(theme.palette.primary.dark)
+            .alpha(0.5)
+            .hex()
+        }}
+      >
+        <PerfectScrollbar
+          component="div"
+          style={{
+            height: !matchUpMd ? "calc(100vh - 56px)" : "calc(100vh - 88px)",
+            paddingLeft: "16px",
+            paddingRight: "16px"
+          }}
+        >
+          <Box sx={{p: 2, scroll: "hidden"}}>
+            <IconButton
+              fontSize="large"
+              sx={{
+                // this component is the three dots dropdown
+                color: theme.palette.secondary.main,
+                cursor: "pointer"
+              }}
+              aria-controls="menu-popular-card"
+              aria-haspopup="true"
+              onClick={handleClick}
+            >
+              <MenuIcon />
+            </IconButton>
+
+            {/* "<!-- menu selector options -->" */}
+            <Menu
+              id="menu-popular-card"
+              anchorEl={anchorEl}
+              keepMounted
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+              variant="selectedMenu"
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "right"
+              }}
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "right"
+              }}
+            >
+              <MenuItem onClick={handleClose}> Websites</MenuItem>
+              <MenuItem onClick={handleClose}> Publications</MenuItem>
+              <MenuItem onClick={handleClose}> Photos? </MenuItem>
+            </Menu>
           </Box>
-        </Box>
-      </NavigationScroll>
+          {data.map(d => {
+            return <Citation props={d} key={d?.title} />;
+          })}
+        </PerfectScrollbar>
+      </Box>
     </>
   );
 };
