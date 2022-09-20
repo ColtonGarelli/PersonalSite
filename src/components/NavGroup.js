@@ -31,7 +31,7 @@ const NavGroup = ({item}) => {
 
   return (
     <>
-      <List sx={{pt: 4, pb: 3}}>{items}</List>
+      <List sx={{m: "auto"}}>{items}</List>
     </>
   );
 };

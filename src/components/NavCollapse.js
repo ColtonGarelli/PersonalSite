@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import {useState} from "react";
+import {useSelector} from "react-redux";
 
 // material-ui
-import { useTheme } from "@mui/material/styles";
+import {useTheme} from "@mui/material/styles";
 import {
   Collapse,
   Link,
@@ -19,13 +19,13 @@ import {
 import NavItem from "./NavItem";
 
 // assets
-import { IconChevronDown, IconChevronUp } from "@tabler/icons";
+import {IconChevronDown, IconChevronUp} from "@tabler/icons";
 
 // ==============================|| SIDEBAR MENU LIST COLLAPSE ITEMS ||============================== //
 
-const NavCollapse = ({ menu, level }) => {
+const NavCollapse = ({menu, level}) => {
   const theme = useTheme();
-  const customization = useSelector((state) => state.customization);
+  const customization = useSelector(state => state.customization);
 
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState(null);
@@ -35,7 +35,7 @@ const NavCollapse = ({ menu, level }) => {
     setSelected(!selected ? menu.id : null);
   };
   // menu collapse & item
-  const menus = menu.children?.map((item) => {
+  const menus = menu.children?.map(item => {
     switch (item.type) {
       case "collapse":
         return <NavCollapse key={item.id} menu={item} level={level + 1} />;
@@ -80,30 +80,29 @@ const NavCollapse = ({ menu, level }) => {
         onClick={handleClick}
       >
         <ListItemText
-          primary={(
+          primary={
             <Link href={menu.url} underline="none" color="inherit" variant="h2">
               {menu.title}
             </Link>
-          )}
+          }
         />
         {open ? (
           <IconChevronUp
             stroke={1.5}
             size="2rem"
-            style={{ marginTop: "auto", marginBottom: "auto" }}
+            style={{marginTop: "auto", marginBottom: "auto"}}
           />
         ) : (
           <IconChevronDown
             stroke={1.5}
             size="2rem"
-            style={{ marginTop: "auto", marginBottom: "auto" }}
+            style={{marginTop: "auto", marginBottom: "auto"}}
           />
         )}
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List
           component="div"
-          disablePadding
           sx={{
             position: "relative",
             "&:after": {
@@ -113,8 +112,7 @@ const NavCollapse = ({ menu, level }) => {
               top: 0,
               height: "100%",
 
-              opacity: 1,
-              background: theme.palette.default?.secondary
+              opacity: 1
             }
           }}
         >

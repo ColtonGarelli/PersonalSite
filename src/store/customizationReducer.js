@@ -8,11 +8,10 @@ import * as actionTypes from "./actions";
 // reducers take a state and an action
 
 export const initialState = {
-  yomama: true,
-  isOpen: [], // for active default menu
-
-  opened: true,
-  theme: "default"
+  isOpen: [], //for active default menu
+  fontFamily: config.fontFamily,
+  borderRadius: config.borderRadius,
+  opened: true
 };
 
 // ==============================|| CUSTOMIZATION REDUCER ||============================== //
@@ -30,27 +29,32 @@ const lendTheme = {
   darkTextPrimary: "#fff",
   darkTextSecondary: "#fff"
 };
-const themeReducer = (state = initialState, action) => {
-  let id;
-  console.log(action);
+const customizationReducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.SWITCH_THEME:
-      id = action.id;
-
+    case actionTypes.MENU_OPEN:
+      const id = action.id;
       return {
         ...state,
-        isOpen: [id],
-        theme: lendTheme
+        isOpen: [id]
       };
-
     case actionTypes.SET_MENU:
       return {
         ...state,
         opened: action.opened
+      };
+    case actionTypes.SET_FONT_FAMILY:
+      return {
+        ...state,
+        fontFamily: action.fontFamily
+      };
+    case actionTypes.SET_BORDER_RADIUS:
+      return {
+        ...state,
+        borderRadius: action.borderRadius
       };
     default:
       return state;
   }
 };
 
-export default themeReducer;
+export default customizationReducer;

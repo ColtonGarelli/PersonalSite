@@ -13,6 +13,8 @@ import {
 } from "@mui/material";
 import Citations from "../components/Citations";
 import PerfectScrollbar from "react-perfect-scrollbar";
+import Slide from "../components/Slide";
+import HomeCard from "../components/HomeCards";
 
 const Home = () => {
   const matchUpMd = useMediaQuery("900px");
@@ -35,61 +37,83 @@ const Home = () => {
     }
   ];
   const gridSpacing = 5;
+  const cardData = {
+    github: {
+      projects: {
+        pam: {
+          link: "something",
+          title: "ProteinAnalysisManager",
+          shortdesc: "short descriptionhere",
+          fulldesc: "full descriptionhere",
+
+          account: "https://github.com/ColtonGarelli"
+        },
+        vizxpress: {
+          link: "something",
+          title: "vizxpress",
+          shortdesc:
+            "A simple Python library for gene expression visualization",
+          fulldesc: "full descriptionhere",
+
+          account: "https://github.com/ColtonGarelli"
+        },
+        cle: {
+          link: "https://github.com/ColtonGarelli/PersonalSite",
+          title: "Portfolio website",
+          shortdesc: "My portfolio website Github repository",
+          fulldesc:
+            "My portfolio website created with React and MaterialUI. A heavily modified version of Berry Dashboard",
+
+          account: "https://github.com/ColtonGarelli"
+        }
+      }
+    },
+    pubs: {
+      projects: {
+        canineDLE: {
+          link: "https://doi.org/10.1016/j.crimmu.2021.03.003",
+          title: "Canine DLE",
+          shortdesc: "",
+          fulldesc: "full descriptionhere",
+
+          account: "https://orcid.org/0000-0003-0225-7910"
+        },
+        reviewCLE: {
+          link: "https://doi.org/10.3389/fimmu.2020.01353",
+          title: "CLE review",
+          shortdesc: "",
+          fulldesc: "",
+          account: "https://orcid.org/0000-0003-0225-7910"
+        }
+      }
+    }
+  };
+
+  console.log(window);
+
   return (
     <>
-      <Box
-        justifyContent="left"
-        alignItems="center"
-        height="200px"
-        sx={{
-          pl: 5
-        }}
-      >
-        <Grid container spacing={gridSpacing}>
-          <Grid item xs={6} md={8}>
-            <Box>
-              <Typography variant="h2" gutterBottom>
-                Hi! I'm Colton
-              </Typography>
-              <Typography variant="body2">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Ultrices gravida dictum fusce ut. Sociis natoque penatibus et
-                magnis dis parturient. Lectus nulla at volutpat diam ut
-                venenatis tellus in metus. Pellentesque eu tincidunt tortor
-                aliquam nulla facilisi cras. Mi bibendum neque egestas congue.
-                Quam adipiscing vitae proin sagittis nisl rhoncus mattis rhoncus
-                urna. Nibh ipsum consequat nisl vel pretium lectus quam id.
-                Faucibus turpis in eu mi bibendum neque egestas congue. At
-                elementum eu facilisis sed odio morbi quis commodo. Magna etiam
-                tempor orci eu lobortis. Id diam maecenas ultricies mi. Diam
-                sollicitudin tempor id eu nisl nunc mi ipsum faucibus. Donec et
-                odio pellentesque diam. Urna nunc id cursus metus aliquam.
-                Nullam vehicula ipsum a arcu cursus vitae congue mauris rhoncus.
-                Sit amet facilisis magna etiam tempor. Quis ipsum suspendisse
-                ultrices gravida dictum. Convallis aenean et tortor at risus
-                viverra. In egestas erat imperdiet sed. Faucibus nisl tincidunt
-                eget nullam. Ac feugiat sed lectus vestibulum mattis ullamcorper
-                velit sed ullamcorper. Ut eu sem integer vitae justo eget.
-                Volutpat maecenas volutpat blandit aliquam etiam erat. Gravida
-                cum sociis natoque penatibus et magnis. Sem nulla pharetra diam
-                sit amet nisl suscipit adipiscing bibendum. Elit eget gravida
-                cum sociis natoque penatibus et magnis. Feugiat nibh sed
-                pulvinar proin gravida hendrerit lectus a. Mollis nunc sed id
-                semper risus in hendrerit. Consectetur adipiscing elit
-                pellentesque habitant. Tellus pellentesque eu tincidunt tortor
-                aliquam nulla facilisi cras. Egestas congue quisque egestas diam
-                in arcu cursus euismod quis. Neque volutpat ac tincidunt vitae
-                semper quis. Quam viverra orci sagittis eu volutpat odio
-                facilisis mauris. Pulvinar mattis nunc sed blandit libero.
-              </Typography>
-            </Box>
-          </Grid>
-          <Grid item xs={6} md={4}>
-            <Citations data={pubData} />
-          </Grid>
+      <Grid container spacing={gridSpacing}>
+        <Grid item xs={6}>
+          <Box
+            justifyContent="center"
+            alignItems="center"
+            sx={{
+              pl: 5
+            }}
+          >
+            <Typography variant="h2" gutterBottom>
+              Hello! My name is Colton Garelli.
+            </Typography>
+            <Typography variant="h3" gutterBottom>
+              I have a B.S. in Biochemstry, Minor in Computer Science.
+            </Typography>
+          </Box>
         </Grid>
-      </Box>
+        <Grid item xs={6}>
+          <HomeCard props={cardData} />
+        </Grid>
+      </Grid>
     </>
   );
 };

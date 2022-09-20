@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import {forwardRef, useEffect} from "react";
+import {forwardRef, useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import chroma from "chroma-js";
@@ -32,7 +32,8 @@ const NavItem = ({item, level}) => {
   const dispatch = useDispatch();
   const customization = useSelector(state => state.customization);
   const matchesSM = useMediaQuery(theme.breakpoints.down("lg"));
-  console.log(theme);
+  const [isActive, setIsActive] = useState(false);
+
   let itemTarget = "_self";
   if (item.target) {
     itemTarget = "_blank";
@@ -47,13 +48,15 @@ const NavItem = ({item, level}) => {
       />
     ))
   };
+  console.log(customization);
   if (item?.external) {
     listItemProps = {component: "a", href: item.url, target: itemTarget};
   }
-
+  // this needs to be fixed, currently doesn't do anything (I think)
   const itemHandler = id => {
+    console.log({type: MENU_OPEN, id});
     dispatch({type: MENU_OPEN, id});
-    if (matchesSM) dispatch({type: SET_MENU, opened: false});
+    matchesSM && dispatch({type: SET_MENU, opened: false});
   };
 
   // active menu item on page load
@@ -69,37 +72,32 @@ const NavItem = ({item, level}) => {
   }, []);
   return (
     <ListItemButton
+      activeStyle={{color: "red"}}
       {...listItemProps}
       sx={{
+        backgroundColor: isActive ? "salmon" : "",
+        color: isActive ? "white" : "",
         // boxShadow: `0px 0px 10px 5px ${theme.palette.primary.light}`,
-
         "&:hover": {
           border: 1,
-          borderColor: theme.palette.primary.light
+          borderColor: theme.palette.grey[50]
+
+          // boxShadow: `0px 0px 10px 5px ${theme.palette.primary.light}`
         },
-        mb: 0.5,
-        justifyContent: "center", // "rgb(121, 134, 203, 0.3)",
+        justifyContent: "center",
+        alignItems: "center", // "rgb(121, 134, 203, 0.3)",
         // (${theme.palette.default?.primary})
         width: "250px",
-        py: level > 1 ? 1 : 3,
-        pl: `${level * 25}px`
+        py: level > 1 ? 1 : 3
       }}
       selected={customization.isOpen.findIndex(id => id === item.id) > -1}
       onClick={() => {
         itemHandler(item.id);
       }}
     >
-      <ListItemText
-        sx={{
-          alignItems: "center",
-          justifyContent: "center"
-        }}
-        primary={
-          <Typography variant="h4" color={theme.darkTextPrimary}>
-            {item.title}
-          </Typography>
-        }
-      />
+      <Typography variant="h4" color={theme.darkTextPrimary}>
+        {item.title}
+      </Typography>
     </ListItemButton>
   );
 };
