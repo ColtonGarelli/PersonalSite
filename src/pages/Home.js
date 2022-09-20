@@ -45,7 +45,6 @@ const Home = () => {
           title: "ProteinAnalysisManager",
           shortdesc: "short descriptionhere",
           fulldesc: "full descriptionhere",
-
           account: "https://github.com/ColtonGarelli"
         },
         vizxpress: {
@@ -54,7 +53,6 @@ const Home = () => {
           shortdesc:
             "A simple Python library for gene expression visualization",
           fulldesc: "full descriptionhere",
-
           account: "https://github.com/ColtonGarelli"
         },
         cle: {
@@ -63,7 +61,6 @@ const Home = () => {
           shortdesc: "My portfolio website Github repository",
           fulldesc:
             "My portfolio website created with React and MaterialUI. A heavily modified version of Berry Dashboard",
-
           account: "https://github.com/ColtonGarelli"
         }
       }
@@ -73,9 +70,10 @@ const Home = () => {
         canineDLE: {
           link: "https://doi.org/10.1016/j.crimmu.2021.03.003",
           title: "Canine DLE",
-          shortdesc: "",
-          fulldesc: "full descriptionhere",
-
+          shortdesc:
+            "A multi-species study of discoid lupus erythmatosus (DLE)",
+          fulldesc:
+            "Discoid lupus erythmatosus (DLE) is a cutaneous autoimmune disease that occurs in humans and canines, and ",
           account: "https://orcid.org/0000-0003-0225-7910"
         },
         reviewCLE: {

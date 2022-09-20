@@ -1,38 +1,31 @@
 import {
-	Grid,
-	Box,
-	AvatarGroup,
-	Typography,
-	CardMedia,
-	Card,
-	CardContent,
-	CardActionArea,
-	Avatar,
-	CardHeader,
-	CardActions,
-	Button,
-	Percentage
+  Grid,
+  Box,
+  AvatarGroup,
+  Typography,
+  CardMedia,
+  Card,
+  CardContent,
+  CardActionArea,
+  Avatar,
+  CardHeader,
+  CardActions,
+  Button,
+  Percentage
 } from "@mui/material";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import HomeCard from "./HomeCards";
-import {
-	useTheme
-} from "@mui/material/styles";
+import {useTheme} from "@mui/material/styles";
 
-import {
-	useState,
-	useEffect
-} from "react";
+import {useState, useEffect} from "react";
 
-const Slide = ({
-	props
-}) => {
-	const theme = useTheme();
-	console.log(props);
+const Slide = ({props}) => {
+  const theme = useTheme();
+  console.log(props);
 
-	return (
-		<>
+  return (
+    <>
       <div>
         <Card
           sx={{
@@ -69,6 +62,6 @@ const Slide = ({
         </Card>
       </div>
     </>
-	);
+  );
 };
 export default Slide;
