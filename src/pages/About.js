@@ -52,46 +52,23 @@ const Home = () => {
                 Hello! My name is Colton Garelli
               </Typography>
               <Typography variant="h4">
-                Lorem ipsum dolor si amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Ultrices gravida dictum fusce ut. Sociis natoque penatibus et
-                magnis dis parturient. Lectus nulla at volutpat diam ut
-                venenatis tellus in metus. Pellentesque eu tincidunt tortor
-                aliquam nulla facilisi cras.
+                I hold a B.S. in Biochemistry with a minor in Computer Science
+                from Ithaca College. I have been involved in a variety of
+                research projects ranging from biophysical protein
+                characterization to translational medicine. I have published two
+                academic papers, including a review article on cutaneous lupus
+                and original research study of discoid lupus pathogenesis. My
+                work has also included writing various Python tools for
+                scientific applications.
               </Typography>
               <br />
               <br />
               <Typography variant="h5">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Ultrices gravida dictum fusce ut. Sociis natoque penatibus et
-                magnis dis parturient. Lectus nulla at volutpat diam ut
-                venenatis tellus in metus. Pellentesque eu tincidunt tortor
-                aliquam nulla facilisi cras. Mi bibendum neque egestas congue.
-                Quam adipiscing vitae proin sagittis nisl rhoncus mattis rhoncus
-                urna. Nibh ipsum consequat nisl vel pretium lectus quam id.
-                Faucibus turpis in eu mi bibendum neque egestas congue. At
-                elementum eu facilisis sed odio morbi quis commodo. Magna etiam
-                tempor orci eu lobortis. Id diam maecenas ultricies mi. Diam
-                sollicitudin tempor id eu nisl nunc mi ipsum faucibus. Donec et
-                odio pellentesque diam. Urna nunc id cursus metus aliquam.
-                Nullam vehicula ipsum a arcu cursus vitae congue mauris rhoncus.
-                Sit amet facilisis magna etiam tempor. Quis ipsum suspendisse
-                ultrices gravida dictum. Convallis aenean et tortor at risus
-                viverra. In egestas erat imperdiet sed. Faucibus nisl tincidunt
-                eget nullam. Ac feugiat sed lectus vestibulum mattis ullamcorper
-                velit sed ullamcorper. Ut eu sem integer vitae justo eget.
-                Volutpat maecenas volutpat blandit aliquam etiam erat. Gravida
-                cum sociis natoque penatibus et magnis. Sem nulla pharetra diam
-                sit amet nisl suscipit adipiscing bibendum. Elit eget gravida
-                cum sociis natoque penatibus et magnis. Feugiat nibh sed
-                pulvinar proin gravida hendrerit lectus a. Mollis nunc sed id
-                semper risus in hendrerit. Consectetur adipiscing elit
-                pellentesque habitant. Tellus pellentesque eu tincidunt tortor
-                aliquam nulla facilisi cras. Egestas congue quisque egestas diam
-                in arcu cursus euismod quis. Neque volutpat ac tincidunt vitae
-                semper quis. Quam viverra orci sagittis eu volutpat odio
-                facilisis mauris. Pulvinar mattis nunc sed blandit libero.
+                I started my lab career as an undergraduate at Ithaca College in
+                Dr. Jamie Ellis's lab. I studied a series of disorded protein
+                domains from a group of <i>Arabidopsis thaliana</i>{" "}
+                transcription factors known as the ARF family. My research
+                involved
               </Typography>
             </Box>
           </Grid>
