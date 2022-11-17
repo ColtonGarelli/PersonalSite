@@ -76,11 +76,14 @@ const NavItem = ({item, level}) => {
       {...listItemProps}
       sx={{
         backgroundColor: isActive ? "salmon" : "",
-        color: isActive ? "white" : "",
         // boxShadow: `0px 0px 10px 5px ${theme.palette.primary.light}`,
         "&:hover": {
           border: 1,
-          borderColor: theme.palette.grey[50]
+          backgroundColor: theme.palette.primary.main,
+          cursor: "pointer",
+          "& .innerText": {
+            color: theme.palette.background.paper
+          }
 
           // boxShadow: `0px 0px 10px 5px ${theme.palette.primary.light}`
         },
@@ -95,7 +98,11 @@ const NavItem = ({item, level}) => {
         itemHandler(item.id);
       }}
     >
-      <Typography variant="h4" color={theme.darkTextPrimary}>
+      <Typography
+        className="innerText"
+        variant="h4"
+        color={theme.darkTextPrimary}
+      >
         {item.title}
       </Typography>
     </ListItemButton>

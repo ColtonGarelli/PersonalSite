@@ -7,7 +7,13 @@ import resume from "./resume";
 // ==============================|| MENU ITEMS ||============================== //
 
 const menuItems = {
-  items: [home, about, resume, pubs, notebooks]
+  items: [
+    home,
+    about,
+    resume,
+    pubs
+    // notebooks
+  ]
 };
 
 export default menuItems;

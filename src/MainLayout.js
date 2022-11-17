@@ -54,7 +54,6 @@ const MenuList = () => {
 // styles
 const Main = styled("main")(({theme}) => ({
   // this is styling for the main content card in middle of the page
-  backgroundImage: `linear-gradient(180deg, #2af598 0%, #009efd 100%)`,
   border: "1px",
   borderColor: "#fff",
   marginLeft: 0,
@@ -89,19 +88,20 @@ const MainLayout = () => {
     <>
       <Box
         sx={{
-          height: "100vh"
+          height: "100vh",
+          width: "100vw"
         }}
       >
         {/* header */}
         <AppBar
           enableColorOnDark
-          position="fixed"
+          position="sticky"
           elevation={0}
           sx={{
             background: "transparent",
             backdropFilter: "blur(5px)",
             height: "140px",
-            width: "100%"
+            width: "110vw"
           }}
         >
           <Toolbar>
@@ -110,7 +110,7 @@ const MainLayout = () => {
           </Toolbar>
           <Divider
             orientation="horizontal"
-            variant="fullWidth"
+            width="100%"
             color={theme.divider}
             sx={{height: "1px", flex: "auto", minHeight: "inherit"}}
           />
@@ -121,7 +121,8 @@ const MainLayout = () => {
         <Box
           sx={{
             height: "100%",
-            pt: "10%"
+            py: "50px",
+            px: 5
           }}
         >
           <Breadcrumbs />

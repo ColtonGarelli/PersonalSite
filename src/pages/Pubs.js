@@ -21,11 +21,8 @@ const Pubs = () => {
         }}
       >
         <Grid container spacing={gridSpacing}>
-          <Grid item xs={12} md={8}>
+          <Grid item xs={12} md={12}>
             <Publication pub={{samplePDF, sharedSigs, cutaneousLupusRev}} />
-          </Grid>
-          <Grid item xs={12} md={4}>
-            somethin else
           </Grid>
         </Grid>
       </Box>

@@ -19,7 +19,7 @@ export const theme = customization => {
   const themeOption = {
     // import color variables from scss
     colors: color,
-    heading: color.grey900,
+    heading: color.primaryMain,
     paper: color.paper,
     backgroundDefault: color.paper,
     background: color.primaryLight,

@@ -60,18 +60,25 @@ const Publication = props => {
   console.log(pdfs);
   return (
     <>
-      <PdfSelector
-        props={{
-          currentPDF,
-          handleChange,
-          pdfs
-        }}
-      />
-      <Box overflowY="hidden" sx={{height: "60vh"}}>
-        <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.13.216/build/pdf.worker.min.js">
-          <PdfNav props={{currentPDF}} />
-        </Worker>
-      </Box>
+      <Grid container>
+        <Grid item xs={12}>
+          <PdfSelector
+            props={{
+              currentPDF,
+              handleChange,
+              pdfs
+            }}
+          />{" "}
+          <Grid item xs={12}>
+            <Box overflowY="hidden" sx={{height: "80vh"}}>
+              <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.13.216/build/pdf.worker.min.js">
+                <PdfNav props={{currentPDF}} />
+              </Worker>
+              0
+            </Box>
+          </Grid>
+        </Grid>
+      </Grid>
     </>
   );
 };

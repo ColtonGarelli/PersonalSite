@@ -1,12 +1,17 @@
 import {pageNavigationPlugin} from "@react-pdf-viewer/page-navigation";
 import {RenderGoToPageProps} from "@react-pdf-viewer/page-navigation";
+import {zoomPlugin} from "@react-pdf-viewer/zoom";
+import "@react-pdf-viewer/zoom/lib/styles/index.css";
+
 import {Viewer} from "@react-pdf-viewer/core";
 
 const PdfNav = props => {
   const pageNavigationPluginInstance = pageNavigationPlugin();
+  const zoomPluginInstance = zoomPlugin();
+
   const {
-    GoToFirstPageButton,
-    GoToLastPageButton,
+    ZoomIn,
+    ZoomOut,
     GoToNextPageButton,
     GoToPreviousPage,
     CurrentPageInput

@@ -49,7 +49,7 @@ const Home = () => {
           <Grid item xs={6} md={8}>
             <Box>
               <Typography variant="h2" gutterBottom>
-                Hello! My name is Colton Garelli
+                A little bit about me
               </Typography>
               <Typography variant="h4">
                 I hold a B.S. in Biochemistry with a minor in Computer Science
@@ -65,10 +65,24 @@ const Home = () => {
               <br />
               <Typography variant="h5">
                 I started my lab career as an undergraduate at Ithaca College in
-                Dr. Jamie Ellis's lab. I studied a series of disorded protein
-                domains from a group of <i>Arabidopsis thaliana</i>{" "}
-                transcription factors known as the ARF family. My research
-                involved
+                Dr. Jamie Ellis' lab. I studied a series of disorded protein
+                domains from a group of <i>Arabidopsis thaliana </i>
+                transcription factors known as the ARF family. The primary aim
+                of the project was to find a relationship between primary
+                sequence composition and biological function. We used a few
+                fluorometry based techniques including fluorescence quenching
+                taking advantage of an environmentally sensitive extrinsic
+                fluorophore. I proposed a collaborative project to my computer
+                science mentor Dr. Toby Dragon. With Dr. Ellis' and Dr. Dragon's
+                guidence, I developed a framework using Python, known as Protein
+                Analysis Manager or PAM, to quantify various biophysical
+                characteristics of primary protein sequences. The basic workflow
+                for PAM is as follows: load primary sequence from file or
+                databases such as UniProt, create objects of the SeqRecord class
+                from the Biopython package, send requests with primary sequence
+                to external REST APIs for analysis and/or pass sequence to
+                package functions for analysis, and allows for viewing output in
+                the console and outputting data to files.
               </Typography>
             </Box>
           </Grid>
